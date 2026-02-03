@@ -1,0 +1,118 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Human merchants who sell products
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  passwordHash  String
+  name          String
+  businessName  String?
+  stripeAccountId String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  products      Product[]
+  transactions  Transaction[] @relation("SellerTransactions")
+}
+
+// AI Agent credentials
+model Agent {
+  id            String    @id @default(cuid())
+  agentName     String
+  agentToken    String    @unique
+  humanOwnerId  String?   // Optional link to human who owns/controls agent
+  humanEmail    String?   // For claim link
+  claimed       Boolean   @default(false)
+  capabilities  String    // JSON array of capability strings
+  budgetLimit   Float?    // Max spend per transaction
+  createdAt     DateTime  @default(now())
+  lastActive    DateTime?
+  
+  transactions  Transaction[] @relation("BuyerTransactions")
+}
+
+// Products listed by merchants
+model Product {
+  id            String    @id @default(cuid())
+  sellerId      String
+  seller        User      @relation(fields: [sellerId], references: [id])
+  
+  // Product Identity
+  name          String
+  productType   String    // API, Dataset, Automation, SaaS Tool, Prompt Pack, Model, Plugin
+  version       String
+  
+  // Pricing
+  priceType     String    // free, fixed, usage-based, subscription
+  price         Float     // In cents
+  currency      String    @default("USD")
+  
+  // Agent Appeal - Full structured data
+  agentAppeal   String    // JSON blob containing all 15 sections
+  
+  // Categorization
+  category      String
+  tags          String    // JSON array
+  
+  // Status
+  status        String    @default("draft") // draft, live, paused, archived
+  
+  // Metrics
+  views         Int       @default(0)
+  purchases     Int       @default(0)
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  transactions  Transaction[]
+}
+
+// Transaction records
+model Transaction {
+  id              String    @id @default(cuid())
+  productId       String
+  product         Product   @relation(fields: [productId], references: [id])
+  
+  sellerId        String
+  seller          User      @relation("SellerTransactions", fields: [sellerId], references: [id])
+  
+  agentId         String
+  agent           Agent     @relation("BuyerTransactions", fields: [agentId], references: [id])
+  
+  // Amounts (in cents)
+  grossAmount     Float     // Total charged
+  platformFee     Float     // 5% to TexFlowMKT
+  sellerAmount    Float     // 95% to seller
+  
+  currency        String    @default("USD")
+  
+  // Stripe
+  stripePaymentId String?
+  stripeStatus    String?
+  
+  // Status
+  status          String    @default("pending") // pending, completed, failed, refunded
+  
+  createdAt       DateTime  @default(now())
+  completedAt     DateTime?
+}
+
+// Categories for product organization
+model Category {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  parentId    String?
+  orderIndex  Int       @default(0)
+}

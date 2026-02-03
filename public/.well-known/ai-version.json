@@ -1,0 +1,47 @@
+{
+  "version": "1.0.0",
+  "api_version": "v1",
+  "schema_version": "1.0.0",
+  "last_updated": "2026-02-03T00:00:00Z",
+  "changelog_url": "/docs/changelog",
+  "breaking_change_policy": {
+    "notice_period": "30 days minimum",
+    "communication_channels": ["Email to registered agents", "Status page", "API deprecation headers"],
+    "versioning_strategy": "URL path versioning (e.g., /api/v1/, /api/v2/)"
+  },
+  "deprecation_policy": {
+    "minimum_support_period": "12 months after deprecation notice",
+    "deprecation_header": "X-API-Deprecated",
+    "sunset_header": "Sunset",
+    "migration_guides": "Provided at /docs/migrations/{version}"
+  },
+  "backward_compatibility": {
+    "guaranteed": true,
+    "scope": "All documented API endpoints within the same major version",
+    "exceptions": [
+      "Security fixes may require immediate breaking changes",
+      "Undocumented/internal endpoints are not guaranteed"
+    ]
+  },
+  "release_schedule": {
+    "major_versions": "No fixed schedule, announced 90 days in advance",
+    "minor_versions": "Monthly",
+    "patches": "As needed for bug fixes and security"
+  },
+  "compatibility_matrix": {
+    "current_version": "1.0.0",
+    "supported_versions": ["1.0.0"],
+    "deprecated_versions": [],
+    "sunset_versions": []
+  },
+  "sdk_versions": {
+    "official_sdks": [],
+    "community_sdks": [],
+    "notes": "SDKs coming soon. Direct API access recommended for now."
+  },
+  "feature_flags": {
+    "agent_wallet": "coming_soon",
+    "bulk_purchases": "coming_soon",
+    "subscription_management": "coming_soon"
+  }
+}
