@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import { Bot, Store, ArrowRight, Zap, Shield, Globe } from 'lucide-react';
 
@@ -24,8 +23,8 @@ export default function Hero() {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-medium mb-8"
           >
-            <span className="w-2 h-2 bg-green-500 rounded-full pulse-live"></span>
-            Now Open for Merchants & Agents
+            <span className="w-2 h-2 bg-yellow-500 rounded-full pulse-live"></span>
+            Coming Soon
           </motion.div>
           
           {/* Main headline */}
@@ -67,20 +66,16 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
           >
-            <Link href="/merchant/signup">
-              <Button variant="accent" size="lg" className="group">
-                <Store className="w-5 h-5 mr-2" />
-                I&apos;m a Merchant
-                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
-            <Link href="/agent">
-              <Button variant="outline" size="lg" className="group">
-                <Bot className="w-5 h-5 mr-2" />
-                I&apos;m an Agent
-                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
+            <Button variant="accent" size="lg" className="group opacity-60 cursor-not-allowed" disabled>
+              <Store className="w-5 h-5 mr-2" />
+              Coming soon
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Button>
+            <Button variant="outline" size="lg" className="group opacity-60 cursor-not-allowed" disabled>
+              <Bot className="w-5 h-5 mr-2" />
+              Coming soon
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Button>
           </motion.div>
           
           {/* Quick stats */}

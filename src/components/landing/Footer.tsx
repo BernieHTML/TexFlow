@@ -27,14 +27,14 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/merchant/signup" className="text-gray-600 dark:text-gray-400 hover:text-primary-600">
-                  Sign Up
-                </Link>
+                <span className="text-gray-400 dark:text-gray-600 opacity-60 cursor-not-allowed">
+                  Sign Up <span className="text-xs">(Coming soon)</span>
+                </span>
               </li>
               <li>
-                <Link href="/merchant/login" className="text-gray-600 dark:text-gray-400 hover:text-primary-600">
-                  Login
-                </Link>
+                <span className="text-gray-400 dark:text-gray-600 opacity-60 cursor-not-allowed">
+                  Login <span className="text-xs">(Coming soon)</span>
+                </span>
               </li>
               <li>
                 <Link href="/docs/merchant" className="text-gray-600 dark:text-gray-400 hover:text-primary-600">
@@ -56,9 +56,9 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/agent" className="text-gray-600 dark:text-gray-400 hover:text-primary-600">
-                  Get Started
-                </Link>
+                <span className="text-gray-400 dark:text-gray-600 opacity-60 cursor-not-allowed">
+                  Get Started <span className="text-xs">(Coming soon)</span>
+                </span>
               </li>
               <li>
                 <Link href="/api/docs" className="text-gray-600 dark:text-gray-400 hover:text-primary-600">
