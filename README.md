@@ -224,7 +224,7 @@ npm run db:seed
 ```
 
 This creates:
-- Demo merchant account: `demo@texflowmkt.com` / `demo1234`
+- Demo merchant account: `demo@texflow.tech` / `demo1234`
 - Three demo products (WebScraper Pro API, TranslateNow API, ImageGen Studio)
 - Product categories
 

@@ -1,20 +1,33 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Bot, Terminal, Copy, CheckCircle, ArrowRight, ExternalLink, FileJson, Shield, Zap } from 'lucide-react';
-import { useState } from 'react';
+import { Bot, Copy, CheckCircle, ExternalLink, FileJson, Shield, Zap } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 
 export default function AgentEntryPage() {
   const [copied, setCopied] = useState<string | null>(null);
+  const [baseUrl, setBaseUrl] = useState<string>('http://localhost:3000');
+  
+  useEffect(() => {
+    // Get the current host dynamically
+    if (typeof window !== 'undefined') {
+      setBaseUrl(`${window.location.protocol}//${window.location.host}`);
+    }
+  }, []);
   
   const copyToClipboard = (text: string, id: string) => {
     navigator.clipboard.writeText(text);
     setCopied(id);
     setTimeout(() => setCopied(null), 2000);
   };
+
+  const skillFileUrl = `${baseUrl}/skill.md`;
+  const siteJsonUrl = `${baseUrl}/.well-known/ai-site.json`;
+  const registerUrl = `${baseUrl}/api/agent/register`;
+  const catalogUrl = `${baseUrl}/api/catalog`;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
@@ -53,68 +66,26 @@ export default function AgentEntryPage() {
           </p>
         </motion.div>
 
-        {/* Entry Methods */}
+        {/* Primary Entry Method - Web/API */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="grid md:grid-cols-2 gap-6 mb-16"
+          className="mb-16"
         >
-          {/* NPX Method */}
           <Card variant="glass" className="p-6">
             <div className="flex items-center gap-2 mb-4">
-              <Terminal className="w-5 h-5 text-green-400" />
-              <span className="text-white font-medium">Quick Install</span>
-            </div>
-            
-            <div className="bg-slate-800/80 rounded-lg p-4 mb-4 font-mono">
-              <div className="flex items-center justify-between">
-                <code className="text-green-400 text-sm">
-                  npx texflowmkt@latest install
-                </code>
-                <button
-                  onClick={() => copyToClipboard('npx texflowmkt@latest install', 'npx')}
-                  className="text-slate-400 hover:text-white transition-colors"
-                >
-                  {copied === 'npx' ? (
-                    <CheckCircle className="w-4 h-4 text-green-400" />
-                  ) : (
-                    <Copy className="w-4 h-4" />
-                  )}
-                </button>
-              </div>
-            </div>
-            
-            <ol className="text-slate-400 text-sm space-y-2">
-              <li className="flex items-start gap-2">
-                <span className="text-accent-400 font-bold">1.</span>
-                Run the command above to get started
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-accent-400 font-bold">2.</span>
-                Register & send your human the claim link
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-accent-400 font-bold">3.</span>
-                Once claimed, start purchasing!
-              </li>
-            </ol>
-          </Card>
-          
-          {/* Skill File Method */}
-          <Card variant="glass" className="p-6">
-            <div className="flex items-center gap-2 mb-4">
-              <FileJson className="w-5 h-5 text-blue-400" />
-              <span className="text-white font-medium">Fetch Skill File</span>
+              <FileJson className="w-6 h-6 text-blue-400" />
+              <span className="text-white font-semibold text-lg">Get Started (Web/API)</span>
             </div>
             
             <div className="bg-slate-800/80 rounded-lg p-4 mb-4 font-mono">
               <div className="flex items-center justify-between">
                 <code className="text-blue-400 text-sm break-all">
-                  curl -s https://texflowmkt.com/skill.md
+                  curl -s {skillFileUrl}
                 </code>
                 <button
-                  onClick={() => copyToClipboard('curl -s https://texflowmkt.com/skill.md', 'curl')}
+                  onClick={() => copyToClipboard(`curl -s ${skillFileUrl}`, 'curl')}
                   className="text-slate-400 hover:text-white transition-colors flex-shrink-0 ml-2"
                 >
                   {copied === 'curl' ? (
@@ -126,20 +97,57 @@ export default function AgentEntryPage() {
               </div>
             </div>
             
-            <ol className="text-slate-400 text-sm space-y-2">
-              <li className="flex items-start gap-2">
-                <span className="text-blue-400 font-bold">1.</span>
-                Fetch the skill file to understand capabilities
+            <ol className="text-slate-300 text-sm space-y-3 mb-6">
+              <li className="flex items-start gap-3">
+                <span className="text-blue-400 font-bold text-lg">1.</span>
+                <div>
+                  <span className="font-medium">Fetch the skill file</span> to understand capabilities and API structure
+                  <div className="mt-1 text-xs text-slate-400 font-mono bg-slate-900/50 p-2 rounded">
+                    curl -s {skillFileUrl}
+                  </div>
+                </div>
               </li>
-              <li className="flex items-start gap-2">
-                <span className="text-blue-400 font-bold">2.</span>
-                Register via POST /api/agent/register
+              <li className="flex items-start gap-3">
+                <span className="text-blue-400 font-bold text-lg">2.</span>
+                <div>
+                  <span className="font-medium">Register your agent</span> and get credentials
+                  <div className="mt-1 text-xs text-slate-400 font-mono bg-slate-900/50 p-2 rounded">
+                    curl -X POST {registerUrl} \<br />
+                    &nbsp;&nbsp;-H &quot;Content-Type: application/json&quot; \<br />
+                    &nbsp;&nbsp;-d &apos;{`{"agentName": "my-agent", "humanEmail": "owner@example.com"}`}&apos;
+                  </div>
+                </div>
               </li>
-              <li className="flex items-start gap-2">
-                <span className="text-blue-400 font-bold">3.</span>
-                Browse catalog and make purchases
+              <li className="flex items-start gap-3">
+                <span className="text-blue-400 font-bold text-lg">3.</span>
+                <div>
+                  <span className="font-medium">Send claim link to your human</span> (if provided) for account verification
+                </div>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-blue-400 font-bold text-lg">4.</span>
+                <div>
+                  <span className="font-medium">Start browsing and purchasing!</span> Use your agentId and agentToken in API requests
+                </div>
               </li>
             </ol>
+
+            <div className="pt-4 border-t border-slate-700">
+              <p className="text-xs text-slate-400 mb-2">Quick links:</p>
+              <div className="flex flex-wrap gap-2">
+                <a href={skillFileUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:text-blue-300">
+                  View Skill File →
+                </a>
+                <span className="text-slate-600">•</span>
+                <a href={siteJsonUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:text-blue-300">
+                  Site Discovery →
+                </a>
+                <span className="text-slate-600">•</span>
+                <a href="/.well-known/ai-capabilities.json" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:text-blue-300">
+                  Capabilities →
+                </a>
+              </div>
+            </div>
           </Card>
         </motion.div>
 
@@ -150,15 +158,15 @@ export default function AgentEntryPage() {
           transition={{ delay: 0.2 }}
           className="mb-16"
         >
-          <h2 className="text-2xl font-bold text-white mb-6">Quick Start</h2>
+          <h2 className="text-2xl font-bold text-white mb-6">Quick Start Guide</h2>
           
           <Card variant="glass" className="p-6">
             <pre className="bg-slate-800/80 rounded-lg p-4 overflow-x-auto text-sm">
               <code className="text-slate-300">{`# 1. Discover the marketplace
-curl https://texflowmkt.com/.well-known/ai-site.json
+curl ${siteJsonUrl}
 
 # 2. Register your agent
-curl -X POST https://texflowmkt.com/api/agent/register \\
+curl -X POST ${registerUrl} \\
   -H "Content-Type: application/json" \\
   -d '{
     "agentName": "my-helpful-agent",
@@ -169,17 +177,22 @@ curl -X POST https://texflowmkt.com/api/agent/register \\
 # Response includes agentId, agentToken, and claimUrl
 
 # 3. Browse the catalog
-curl https://texflowmkt.com/api/catalog \\
+curl ${catalogUrl} \\
+  -H "X-Agent-Id: YOUR_AGENT_ID" \\
+  -H "X-Agent-Token: YOUR_TOKEN"
+
+# Filter by category
+curl "${catalogUrl}?category=apis" \\
   -H "X-Agent-Id: YOUR_AGENT_ID" \\
   -H "X-Agent-Token: YOUR_TOKEN"
 
 # 4. Get product details
-curl https://texflowmkt.com/api/catalog/PRODUCT_ID \\
+curl ${baseUrl}/api/catalog/PRODUCT_ID \\
   -H "X-Agent-Id: YOUR_AGENT_ID" \\
   -H "X-Agent-Token: YOUR_TOKEN"
 
 # 5. Purchase a product
-curl -X POST https://texflowmkt.com/api/purchase \\
+curl -X POST ${baseUrl}/api/purchase \\
   -H "Content-Type: application/json" \\
   -H "X-Agent-Id: YOUR_AGENT_ID" \\
   -H "X-Agent-Token: YOUR_TOKEN" \\
@@ -213,15 +226,15 @@ curl -X POST https://texflowmkt.com/api/purchase \\
             ].map((endpoint) => (
               <Card key={endpoint.path} variant="glass" className="p-4">
                 <div className="flex items-start justify-between">
-                  <div>
-                    <code className="text-accent-400 text-sm">{endpoint.path}</code>
+                  <div className="flex-1">
+                    <code className="text-accent-400 text-sm break-all">{endpoint.path}</code>
                     <p className="text-slate-400 text-sm mt-1">{endpoint.desc}</p>
                   </div>
                   <a
                     href={endpoint.path}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-slate-500 hover:text-white"
+                    className="text-slate-500 hover:text-white ml-2 flex-shrink-0"
                   >
                     <ExternalLink className="w-4 h-4" />
                   </a>
@@ -279,13 +292,13 @@ curl -X POST https://texflowmkt.com/api/purchase \\
               Ready to start? Fetch the skill file or register directly.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/skill.md" target="_blank" rel="noopener noreferrer">
+              <a href={skillFileUrl} target="_blank" rel="noopener noreferrer">
                 <Button variant="accent">
                   <FileJson className="w-4 h-4 mr-2" />
                   View Skill File
                 </Button>
               </a>
-              <a href="/.well-known/ai-site.json" target="_blank" rel="noopener noreferrer">
+              <a href={siteJsonUrl} target="_blank" rel="noopener noreferrer">
                 <Button variant="outline">
                   <ExternalLink className="w-4 h-4 mr-2" />
                   Discover Site

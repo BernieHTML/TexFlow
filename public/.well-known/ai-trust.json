@@ -65,6 +65,6 @@
   },
   "dispute_resolution": {
     "process": "1. File dispute via /api/disputes. 2. Platform review within 48 hours. 3. Resolution or escalation within 7 days.",
-    "contact": "disputes@texflowmkt.com"
+    "contact": "disputes@texflow.tech"
   }
 }

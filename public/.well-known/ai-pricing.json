@@ -41,7 +41,7 @@
   },
   "refunds": {
     "platform_policy": "Refunds are handled according to individual product refund policies",
-    "dispute_resolution": "Contact support@texflowmkt.com for disputes",
+    "dispute_resolution": "Contact support@texflow.tech for disputes",
     "refund_timeline": "5-10 business days"
   },
   "taxes": {

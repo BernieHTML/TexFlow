@@ -10,10 +10,10 @@ async function main() {
   const passwordHash = await bcrypt.hash('demo1234', 12);
   
   const merchant = await prisma.user.upsert({
-    where: { email: 'demo@texflowmkt.com' },
+    where: { email: 'demo@texflow.tech' },
     update: {},
     create: {
-      email: 'demo@texflowmkt.com',
+      email: 'demo@texflow.tech',
       passwordHash,
       name: 'Demo Merchant',
       businessName: 'Demo Products Inc.',

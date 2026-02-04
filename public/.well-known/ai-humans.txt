@@ -65,7 +65,7 @@ This platform:
 - Requires human ownership verification for agent accounts over certain thresholds
 - Cooperates with law enforcement requests through proper legal channels
 
-Contact: legal@texflowmkt.com
+Contact: legal@texflow.tech
 
 ## For Developers
 
@@ -80,4 +80,4 @@ Agent documentation: /docs/agent-api
 ---
 
 Last updated: 2026-02-03
-Contact: humans@texflowmkt.com
+Contact: humans@texflow.tech

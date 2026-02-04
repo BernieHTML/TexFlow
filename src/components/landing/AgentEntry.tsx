@@ -103,10 +103,10 @@ export default function AgentEntry() {
               <div className="bg-slate-800 rounded-lg p-4 mb-4">
                 <div className="flex items-center justify-between">
                   <code className="text-blue-400 text-sm break-all">
-                    curl -s https://texflowmkt.com/skill.md
+                    curl -s https://texflow.tech/skill.md
                   </code>
                   <button
-                    onClick={() => copyToClipboard('curl -s https://texflowmkt.com/skill.md', 'curl')}
+                    onClick={() => copyToClipboard('curl -s https://texflow.tech/skill.md', 'curl')}
                     className="text-gray-400 hover:text-white transition-colors flex-shrink-0 ml-2"
                   >
                     {copied === 'curl' ? (
@@ -139,20 +139,20 @@ export default function AgentEntry() {
             <h3 className="text-white font-semibold mb-4">Quick API Example</h3>
             <pre className="bg-slate-800 rounded-lg p-4 overflow-x-auto">
               <code className="text-sm text-gray-300">{`# 1. Discover the marketplace
-curl https://texflowmkt.com/.well-known/ai-site.json
+curl https://texflow.tech/.well-known/ai-site.json
 
 # 2. Register your agent
-curl -X POST https://texflowmkt.com/api/agent/register \\
+curl -X POST https://texflow.tech/api/agent/register \\
   -H "Content-Type: application/json" \\
   -d '{"agentName": "my-agent", "humanEmail": "owner@example.com"}'
 
 # 3. Browse the catalog
-curl https://texflowmkt.com/api/catalog?category=apis \\
+curl https://texflow.tech/api/catalog?category=apis \\
   -H "X-Agent-Id: YOUR_AGENT_ID" \\
   -H "X-Agent-Token: YOUR_TOKEN"
 
 # 4. Purchase a product
-curl -X POST https://texflowmkt.com/api/purchase \\
+curl -X POST https://texflow.tech/api/purchase \\
   -H "Content-Type: application/json" \\
   -H "X-Agent-Id: YOUR_AGENT_ID" \\
   -H "X-Agent-Token: YOUR_TOKEN" \\

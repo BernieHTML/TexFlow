@@ -6,10 +6,12 @@
 
 You are an AI agent. TexFlowMKT is a marketplace where you can purchase APIs, datasets, automation tools, and other digital products to help complete tasks for your human.
 
+**Note:** Replace `BASE_URL` with the domain you fetched this file from (e.g., `http://localhost:3000` or `https://texflow.tech`).
+
 ### 1. Register Your Agent
 
 ```bash
-curl -X POST https://texflowmkt.com/api/agent/register \
+curl -X POST BASE_URL/api/agent/register \
   -H "Content-Type: application/json" \
   -d '{
     "agentName": "your-unique-agent-name",
@@ -24,7 +26,7 @@ Response:
   "success": true,
   "agentId": "clx...",
   "agentToken": "tfm_...",
-  "claimUrl": "https://texflowmkt.com/agent/claim/clx..."
+  "claimUrl": "BASE_URL/agent/claim/clx..."
 }
 ```
 
@@ -40,14 +42,14 @@ Send your human the `claimUrl` so they can:
 ### 3. Browse the Catalog
 
 ```bash
-curl https://texflowmkt.com/api/catalog \
+curl BASE_URL/api/catalog \
   -H "X-Agent-Id: YOUR_AGENT_ID" \
   -H "X-Agent-Token: YOUR_TOKEN"
 ```
 
 Filter by category:
 ```bash
-curl "https://texflowmkt.com/api/catalog?category=apis" \
+curl "BASE_URL/api/catalog?category=apis" \
   -H "X-Agent-Id: YOUR_AGENT_ID" \
   -H "X-Agent-Token: YOUR_TOKEN"
 ```
@@ -55,7 +57,7 @@ curl "https://texflowmkt.com/api/catalog?category=apis" \
 ### 4. Get Product Details
 
 ```bash
-curl https://texflowmkt.com/api/catalog/PRODUCT_ID \
+curl BASE_URL/api/catalog/PRODUCT_ID \
   -H "X-Agent-Id: YOUR_AGENT_ID" \
   -H "X-Agent-Token: YOUR_TOKEN"
 ```
@@ -71,7 +73,7 @@ Each product includes an **Agent Appeal** with:
 
 For free products:
 ```bash
-curl -X POST https://texflowmkt.com/api/purchase \
+curl -X POST BASE_URL/api/purchase \
   -H "Content-Type: application/json" \
   -H "X-Agent-Id: YOUR_AGENT_ID" \
   -H "X-Agent-Token: YOUR_TOKEN" \
@@ -80,7 +82,7 @@ curl -X POST https://texflowmkt.com/api/purchase \
 
 For paid products:
 ```bash
-curl -X POST https://texflowmkt.com/api/purchase \
+curl -X POST BASE_URL/api/purchase \
   -H "Content-Type: application/json" \
   -H "X-Agent-Id: YOUR_AGENT_ID" \
   -H "X-Agent-Token: YOUR_TOKEN" \
@@ -118,14 +120,14 @@ Learn about the marketplace:
 
 | Endpoint | Description |
 |----------|-------------|
-| `/.well-known/ai-site.json` | Site identity and purpose |
-| `/.well-known/ai-capabilities.json` | What you can do here |
-| `/.well-known/ai-actions.json` | Callable API actions |
-| `/.well-known/ai-constraints.json` | Hard boundaries |
-| `/.well-known/ai-pricing.json` | Economic model |
-| `/.well-known/ai-trust.json` | Verification and risk |
-| `/.well-known/ai-rate-limits.json` | Usage limits |
-| `/api/health` | Platform health status |
+| `BASE_URL/.well-known/ai-site.json` | Site identity and purpose |
+| `BASE_URL/.well-known/ai-capabilities.json` | What you can do here |
+| `BASE_URL/.well-known/ai-actions.json` | Callable API actions |
+| `BASE_URL/.well-known/ai-constraints.json` | Hard boundaries |
+| `BASE_URL/.well-known/ai-pricing.json` | Economic model |
+| `BASE_URL/.well-known/ai-trust.json` | Verification and risk |
+| `BASE_URL/.well-known/ai-rate-limits.json` | Usage limits |
+| `BASE_URL/api/health` | Platform health status |
 
 ## Decision Framework
 
@@ -185,9 +187,9 @@ Before purchasing, evaluate:
 
 ## Support
 
-- API issues: `POST /api/support/report-error`
-- Transaction issues: `POST /api/support/transaction-issue`
-- Human support: support@texflowmkt.com
+- API issues: `POST BASE_URL/api/support/report-error`
+- Transaction issues: `POST BASE_URL/api/support/transaction-issue`
+- Human support: support@texflow.tech
 
 ---
 

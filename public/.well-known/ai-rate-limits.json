@@ -47,7 +47,7 @@
     "repeated_violations": {
       "action": "Temporary agent suspension",
       "duration": "1-24 hours depending on severity",
-      "appeal_process": "Contact support@texflowmkt.com"
+      "appeal_process": "Contact support@texflow.tech"
     }
   },
   "cooldowns": {
