@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Navigation from '@/components/shared/Navigation';
 import Button from '@/components/ui/Button';
+import TypingAnimation from '@/components/ui/TypingAnimation';
 import { ArrowRight, Sparkles, Zap, Shield, Globe, Rocket, Code, Store } from 'lucide-react';
 import Image from 'next/image';
 
@@ -31,13 +32,15 @@ export default function Home() {
                 transition={{ duration: 0.6 }}
                 className="mb-8 flex justify-center"
               >
-                <div className="relative w-32 h-32 md:w-40 md:h-40">
-                  <Image
-                    src="/texflowlogo.png"
-                    alt="TexFlow"
-                    fill
-                    className="object-contain drop-shadow-2xl"
-                  />
+                <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900 dark:to-blue-800 p-4 md:p-5 ring-4 ring-blue-200/50 dark:ring-blue-700/50 shadow-2xl">
+                  <div className="relative w-full h-full rounded-full overflow-hidden">
+                    <Image
+                      src="/texflowlogo.png"
+                      alt="TexFlow"
+                      fill
+                      className="object-contain drop-shadow-2xl"
+                    />
+                  </div>
                 </div>
               </motion.div>
 
@@ -47,27 +50,50 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6"
+                style={{ 
+                  fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                  fontWeight: 800,
+                  letterSpacing: '-0.02em',
+                  textShadow: '0 2px 20px rgba(59, 130, 246, 0.3)'
+                }}
               >
                 <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 dark:from-blue-400 dark:via-blue-300 dark:to-blue-200 bg-clip-text text-transparent">
                   TexFlow
                 </span>
               </motion.h1>
               
-              {/* Tagline */}
-              <motion.p
+              {/* Tagline with typing animation */}
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="text-2xl md:text-3xl lg:text-4xl font-medium text-gray-800 dark:text-gray-200 mb-4"
+                className="text-2xl md:text-3xl lg:text-4xl font-medium text-gray-800 dark:text-gray-200 mb-4 min-h-[3rem] md:min-h-[4rem] lg:min-h-[5rem] flex items-center justify-center landing-text"
+                style={{ 
+                  fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                  fontWeight: 600,
+                  letterSpacing: '-0.01em'
+                }}
               >
-                Empowering the Future of Commerce
-              </motion.p>
+                <TypingAnimation
+                  texts={['The New Agent Internet', 'Humans build, Agents Buy']}
+                  speed={80}
+                  deleteSpeed={40}
+                  pauseTime={2500}
+                  className="text-center"
+                />
+              </motion.div>
               
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-12"
+                style={{ 
+                  fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                  fontWeight: 400,
+                  letterSpacing: '0.01em',
+                  lineHeight: '1.7'
+                }}
               >
                 A suite of innovative products designed for the AI-driven economy. 
                 Where humans and agents collaborate seamlessly.
@@ -127,6 +153,11 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
+                style={{ 
+                  fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                  fontWeight: 800,
+                  letterSpacing: '-0.02em'
+                }}
               >
                 Our Products
               </motion.h2>
@@ -214,6 +245,11 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
+                style={{ 
+                  fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                  fontWeight: 800,
+                  letterSpacing: '-0.02em'
+                }}
               >
                 Why TexFlow?
               </motion.h2>
@@ -277,6 +313,11 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="text-4xl md:text-5xl font-bold text-white mb-6"
+              style={{ 
+                fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                fontWeight: 800,
+                letterSpacing: '-0.02em'
+              }}
             >
               Ready to Get Started?
             </motion.h2>

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Bot, Github, Twitter } from 'lucide-react';
+import { Bot } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -18,14 +18,6 @@ export default function Footer() {
               The marketplace where humans sell and AI agents buy. 
               Built for the future of autonomous commerce.
             </p>
-            <div className="flex items-center gap-4">
-              <a href="#" className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                <Github className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                <Twitter className="w-5 h-5" />
-              </a>
-            </div>
           </div>
           
           {/* Merchants */}
