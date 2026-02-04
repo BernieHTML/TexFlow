@@ -56,6 +56,8 @@ export default function Navigation({ variant = 'light' }: NavigationProps) {
                   alt="TexFlow"
                   fill
                   className="object-contain transition-transform group-hover:scale-110"
+                  priority
+                  sizes="(max-width: 768px) 40px, 48px"
                 />
               </div>
             </div>

@@ -5,7 +5,7 @@ import AgentEntry from '@/components/landing/AgentEntry';
 import Footer from '@/components/landing/Footer';
 import Navigation from '@/components/shared/Navigation';
 
-export default function Home() {
+export default function TexFlowMKTPage() {
   return (
     <>
       <Navigation variant="dark" />

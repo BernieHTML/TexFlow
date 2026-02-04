@@ -15,13 +15,19 @@ export default function Home() {
       <main className="min-h-screen">
         {/* Hero Section */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20">
-          {/* Animated blue gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-blue-950 dark:via-blue-900 dark:to-blue-800"></div>
+          {/* Video background */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="/mars-hero.mp4" type="video/mp4" />
+          </video>
           
-          {/* Floating blue orbs matching logo colors */}
-          <div className="absolute top-20 left-10 w-96 h-96 bg-blue-400/30 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-300/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }}></div>
+          {/* Overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/40 via-blue-800/30 to-blue-900/40 dark:from-blue-950/60 dark:via-blue-900/50 dark:to-blue-950/60"></div>
           
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
             <div className="text-center">
@@ -39,6 +45,8 @@ export default function Home() {
                       alt="TexFlow"
                       fill
                       className="object-contain drop-shadow-2xl"
+                      priority
+                      sizes="(max-width: 768px) 128px, 160px"
                     />
                   </div>
                 </div>
@@ -358,6 +366,7 @@ export default function Home() {
                   alt="TexFlow"
                   fill
                   className="object-contain"
+                  sizes="32px"
                 />
               </div>
               <span className="text-xl font-bold text-white">TexFlow</span>
