@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
+import Navigation from '@/components/shared/Navigation';
 import { formatPrice, formatDate } from '@/lib/utils';
 
 interface Product {
@@ -112,15 +113,13 @@ export default function MerchantDashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
-      {/* Header */}
-      <header className="bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-gray-700">
+      <Navigation variant="dark" />
+      
+      {/* Dashboard Header */}
+      <header className="bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-gray-700 mt-16 md:mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link href="/" className="flex items-center gap-2">
-                <Store className="w-8 h-8 text-primary-600" />
-                <span className="text-xl font-bold text-gray-900 dark:text-white">TexFlowMKT</span>
-              </Link>
               <span className="text-gray-300 dark:text-gray-600">|</span>
               <span className="text-gray-600 dark:text-gray-400">Merchant Dashboard</span>
             </div>
