@@ -8,6 +8,7 @@ import { Store, ArrowRight, Mail, Lock } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Card from '@/components/ui/Card';
+import Navigation from '@/components/shared/Navigation';
 
 export default function MerchantLogin() {
   const router = useRouter();
@@ -46,13 +47,14 @@ export default function MerchantLogin() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 p-4">
+      <Navigation variant="dark" />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-md"
+        className="w-full max-w-md mt-20"
       >
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2 mb-6">
+          <Link href="/texflowmkt" className="inline-flex items-center gap-2 mb-6">
             <Store className="w-10 h-10 text-primary-600" />
             <span className="text-2xl font-bold text-gray-900 dark:text-white">TexFlowMKT</span>
           </Link>

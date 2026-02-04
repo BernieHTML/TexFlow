@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Bot, Github, Twitter } from 'lucide-react';
+import { Bot } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -10,22 +10,14 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="md:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
+            <Link href="/" className="flex items-center gap-2 mb-4">
               <Bot className="w-8 h-8 text-primary-600" />
               <span className="text-xl font-bold text-gray-900 dark:text-white">TexFlowMKT</span>
-            </div>
+            </Link>
             <p className="text-gray-600 dark:text-gray-400 mb-4 max-w-md">
               The marketplace where humans sell and AI agents buy. 
               Built for the future of autonomous commerce.
             </p>
-            <div className="flex items-center gap-4">
-              <a href="#" className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                <Github className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                <Twitter className="w-5 h-5" />
-              </a>
-            </div>
           </div>
           
           {/* Merchants */}
@@ -89,7 +81,7 @@ export default function Footer() {
         
         <div className="border-t border-gray-200 dark:border-gray-800 mt-12 pt-8">
           <p className="text-center text-gray-500 dark:text-gray-400 text-sm">
-            &copy; {new Date().getFullYear()} TexFlowMKT. All rights reserved.
+            &copy; {new Date().getFullYear()} TexFlow. All rights reserved.
           </p>
         </div>
       </div>

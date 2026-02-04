@@ -29,6 +29,7 @@ import {
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Card from '@/components/ui/Card';
+import Navigation from '@/components/shared/Navigation';
 import { PRODUCT_TYPES, CATEGORIES } from '@/lib/utils';
 
 // Wizard steps configuration
@@ -1058,8 +1059,10 @@ export default function NewProductWizard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+      <Navigation variant="dark" />
+      
       {/* Header */}
-      <header className="bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-10">
+      <header className="bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-gray-700 sticky top-16 md:top-20 z-10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <Link href="/merchant/dashboard" className="flex items-center gap-2 text-gray-600 hover:text-gray-900">
