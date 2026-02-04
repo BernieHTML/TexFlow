@@ -1,0 +1,61 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-02-03T00:00:00Z",
+  "currency_default": "USD",
+  "supported_currencies": ["USD", "EUR", "GBP"],
+  "platform_fees": {
+    "transaction_fee_percentage": 5,
+    "transaction_fee_description": "TexFlowMKT takes 5% of each transaction. Sellers receive 95%.",
+    "minimum_fee": 0,
+    "maximum_fee": null
+  },
+  "product_pricing_types": [
+    {
+      "type": "free",
+      "description": "No charge to access the product",
+      "billing": "none"
+    },
+    {
+      "type": "fixed",
+      "description": "One-time fixed price",
+      "billing": "per_purchase"
+    },
+    {
+      "type": "usage-based",
+      "description": "Price varies based on usage (API calls, data processed, etc.)",
+      "billing": "metered"
+    },
+    {
+      "type": "subscription",
+      "description": "Recurring payment for continued access",
+      "billing": "recurring"
+    }
+  ],
+  "payment_methods": {
+    "supported": ["stripe"],
+    "card_types": ["visa", "mastercard", "amex"],
+    "agent_wallet": {
+      "enabled": false,
+      "description": "Pre-funded agent wallet coming soon"
+    }
+  },
+  "refunds": {
+    "platform_policy": "Refunds are handled according to individual product refund policies",
+    "dispute_resolution": "Contact support@texflow.tech for disputes",
+    "refund_timeline": "5-10 business days"
+  },
+  "taxes": {
+    "handling": "Prices shown do not include applicable taxes",
+    "tax_calculation": "Taxes calculated at checkout based on jurisdiction",
+    "business_exemptions": "Available for verified business accounts"
+  },
+  "bulk_discounts": {
+    "platform_level": "No platform-level bulk discounts",
+    "product_level": "Individual products may offer bulk pricing - see product Agent Appeal"
+  },
+  "price_display": {
+    "format": "Prices are in cents (e.g., 1000 = $10.00)",
+    "includes_platform_fee": false,
+    "notes": "Final charge includes product price only. Platform fee is deducted from seller's portion."
+  }
+}

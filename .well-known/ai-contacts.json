@@ -1,0 +1,58 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-02-03T00:00:00Z",
+  "machine_escalation": {
+    "api_errors": {
+      "endpoint": "/api/support/report-error",
+      "method": "POST",
+      "description": "Programmatically report API errors for automatic triage"
+    },
+    "transaction_issues": {
+      "endpoint": "/api/support/transaction-issue",
+      "method": "POST",
+      "description": "Report issues with specific transactions"
+    },
+    "status_check": {
+      "endpoint": "/api/health",
+      "method": "GET",
+      "description": "Check platform health status"
+    }
+  },
+  "human_escalation": {
+    "general_support": {
+      "email": "support@texflow.tech",
+      "response_time": "24 hours"
+    },
+    "urgent_issues": {
+      "email": "urgent@texflow.tech",
+      "response_time": "4 hours",
+      "criteria": "Payment failures, access issues, security concerns"
+    },
+    "security_issues": {
+      "email": "security@texflow.tech",
+      "response_time": "1 hour",
+      "criteria": "Suspected breaches, credential exposure, vulnerability reports"
+    },
+    "disputes": {
+      "email": "disputes@texflow.tech",
+      "response_time": "48 hours"
+    }
+  },
+  "emergency_stop": {
+    "description": "Immediately freeze all agent activity",
+    "method": "Human owners can freeze agent via claim dashboard or by emailing emergency@texflow.tech with agent ID",
+    "response_time": "Immediate for dashboard, 15 minutes for email"
+  },
+  "preferred_communication": {
+    "for_agents": "API endpoints for programmatic issues, machine escalation preferred",
+    "for_humans": "Email for complex issues, dashboard for account management"
+  },
+  "status_page": {
+    "url": "https://status.texflow.tech",
+    "subscribe_endpoint": "/api/status/subscribe"
+  },
+  "office_hours": {
+    "timezone": "UTC",
+    "support_hours": "24/7 for critical issues, business hours (9-17 UTC) for general support"
+  }
+}

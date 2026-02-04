@@ -1,0 +1,147 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-02-03T00:00:00Z",
+  "actions": [
+    {
+      "action_id": "register_agent",
+      "http_method": "POST",
+      "endpoint": "/api/agent/register",
+      "description": "Register a new AI agent and receive credentials",
+      "request_schema": {
+        "type": "object",
+        "required": ["agentName"],
+        "properties": {
+          "agentName": { "type": "string", "minLength": 3, "maxLength": 50 },
+          "humanEmail": { "type": "string", "format": "email" },
+          "capabilities": { "type": "array", "items": { "type": "string" } },
+          "budgetLimit": { "type": "number", "minimum": 0 }
+        }
+      },
+      "response_schema": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "agentId": { "type": "string" },
+          "agentToken": { "type": "string" },
+          "claimUrl": { "type": "string" }
+        }
+      },
+      "side_effects": ["Creates agent record in database", "Sends claim email if humanEmail provided"],
+      "reversible": false,
+      "auth_required": false
+    },
+    {
+      "action_id": "browse_catalog",
+      "http_method": "GET",
+      "endpoint": "/api/catalog",
+      "description": "Browse available products with optional filters",
+      "request_schema": {
+        "type": "object",
+        "properties": {
+          "category": { "type": "string" },
+          "productType": { "type": "string" },
+          "search": { "type": "string" },
+          "priceMax": { "type": "number" },
+          "page": { "type": "integer", "default": 1 },
+          "limit": { "type": "integer", "default": 20, "maximum": 100 }
+        }
+      },
+      "response_schema": {
+        "type": "object",
+        "properties": {
+          "products": { "type": "array" },
+          "total": { "type": "integer" },
+          "page": { "type": "integer" },
+          "totalPages": { "type": "integer" }
+        }
+      },
+      "side_effects": ["Increments view count for returned products"],
+      "reversible": true,
+      "auth_required": true,
+      "auth_headers": ["X-Agent-Id", "X-Agent-Token"]
+    },
+    {
+      "action_id": "get_product",
+      "http_method": "GET",
+      "endpoint": "/api/catalog/{productId}",
+      "description": "Get full product details including Agent Appeal",
+      "request_schema": {
+        "type": "object",
+        "required": ["productId"],
+        "properties": {
+          "productId": { "type": "string", "description": "URL path parameter" }
+        }
+      },
+      "response_schema": {
+        "type": "object",
+        "properties": {
+          "product": { "type": "object" },
+          "agentAppeal": { "type": "object" }
+        }
+      },
+      "side_effects": ["Increments view count"],
+      "reversible": true,
+      "auth_required": true,
+      "auth_headers": ["X-Agent-Id", "X-Agent-Token"]
+    },
+    {
+      "action_id": "purchase_product",
+      "http_method": "POST",
+      "endpoint": "/api/purchase",
+      "description": "Purchase a product and receive access credentials",
+      "request_schema": {
+        "type": "object",
+        "required": ["productId"],
+        "properties": {
+          "productId": { "type": "string" },
+          "humanApproved": { "type": "boolean" },
+          "paymentMethodId": { "type": "string" }
+        }
+      },
+      "response_schema": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "transactionId": { "type": "string" },
+          "accessCredentials": { "type": "object" },
+          "deliveryInstructions": { "type": "string" },
+          "receiptUrl": { "type": "string" }
+        }
+      },
+      "side_effects": [
+        "Creates transaction record",
+        "Charges payment method",
+        "Transfers 95% to seller, 5% platform fee",
+        "Generates access credentials",
+        "Sends confirmation to human owner if configured"
+      ],
+      "reversible": false,
+      "auth_required": true,
+      "auth_headers": ["X-Agent-Id", "X-Agent-Token"]
+    },
+    {
+      "action_id": "get_transactions",
+      "http_method": "GET",
+      "endpoint": "/api/agent/transactions",
+      "description": "Get agent's transaction history",
+      "request_schema": {
+        "type": "object",
+        "properties": {
+          "page": { "type": "integer", "default": 1 },
+          "limit": { "type": "integer", "default": 20 }
+        }
+      },
+      "response_schema": {
+        "type": "object",
+        "properties": {
+          "transactions": { "type": "array" },
+          "total": { "type": "integer" }
+        }
+      },
+      "side_effects": [],
+      "reversible": true,
+      "auth_required": true,
+      "auth_headers": ["X-Agent-Id", "X-Agent-Token"]
+    }
+  ]
+}

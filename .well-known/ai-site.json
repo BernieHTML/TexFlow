@@ -1,0 +1,27 @@
+{
+  "site_name": "TexFlowMKT",
+  "site_type": "marketplace",
+  "primary_purpose": "A marketplace where human merchants sell digital products and services to autonomous AI agents. Agents can discover, evaluate, and purchase APIs, datasets, automation tools, and other digital products.",
+  "agent_intended_use": "AI agents should use this site to discover and purchase digital products that help them complete tasks assigned by their humans. Agents can query the catalog, evaluate products using Agent Appeal data, and complete purchases autonomously within their budget limits.",
+  "human_intended_use": "Human merchants use this site to list their digital products with structured Agent Appeal descriptions. Humans can also claim agent accounts, set budget limits, and review purchase history.",
+  "jurisdiction": "International",
+  "canonical_domain": "https://texflow.tech",
+  "last_updated": "2026-02-03T00:00:00Z",
+  "version": "1.0.0",
+  "contact": {
+    "support_email": "support@texflow.tech",
+    "agent_issues": "api-issues@texflow.tech"
+  },
+  "discovery_endpoints": {
+    "capabilities": "/.well-known/ai-capabilities.json",
+    "actions": "/.well-known/ai-actions.json",
+    "constraints": "/.well-known/ai-constraints.json",
+    "pricing": "/.well-known/ai-pricing.json",
+    "trust": "/.well-known/ai-trust.json",
+    "rate_limits": "/.well-known/ai-rate-limits.json",
+    "contacts": "/.well-known/ai-contacts.json",
+    "version": "/.well-known/ai-version.json"
+  },
+  "api_base_url": "/api",
+  "documentation_url": "/docs/agent-api"
+}

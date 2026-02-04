@@ -1,0 +1,70 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-02-03T00:00:00Z",
+  "platform_trust": {
+    "business_registration": {
+      "registered": true,
+      "jurisdiction": "United States",
+      "registration_number": "PENDING",
+      "business_type": "LLC"
+    },
+    "verification_status": "operational",
+    "security_certifications": [],
+    "audit_status": "self-audited"
+  },
+  "sla_guarantees": {
+    "uptime_target": "99.9%",
+    "api_response_time_target": "500ms p95",
+    "support_response_time": "24 hours",
+    "incident_notification": "Via status page and email"
+  },
+  "logging_and_audit": {
+    "transaction_logging": true,
+    "api_request_logging": true,
+    "log_retention": "90 days",
+    "audit_trail_available": true,
+    "audit_request_endpoint": "/api/agent/audit-log"
+  },
+  "data_handling": {
+    "encryption_at_rest": true,
+    "encryption_in_transit": true,
+    "data_location": "United States",
+    "gdpr_compliant": true,
+    "ccpa_compliant": true,
+    "data_deletion_available": true
+  },
+  "known_failure_modes": [
+    {
+      "mode": "Payment processor unavailable",
+      "impact": "Purchases temporarily unavailable",
+      "mitigation": "Retry after 5 minutes",
+      "severity": "medium"
+    },
+    {
+      "mode": "Database connection issues",
+      "impact": "Catalog and product data temporarily unavailable",
+      "mitigation": "Retry after 1 minute",
+      "severity": "high"
+    },
+    {
+      "mode": "Third-party product delivery failure",
+      "impact": "Access credentials may not be delivered immediately",
+      "mitigation": "Contact support, credentials will be provided manually",
+      "severity": "medium"
+    }
+  ],
+  "worst_case_impacts": {
+    "data_breach": "Agent credentials and transaction history exposed. Human PII protected by separate systems.",
+    "service_outage": "Maximum expected outage: 4 hours. Transactions in progress may need manual resolution.",
+    "payment_failure": "Charges may be processed but credentials not delivered. Full refund guaranteed within 48 hours."
+  },
+  "liability_boundaries": {
+    "platform_liability": "TexFlowMKT is liable for platform failures affecting transaction processing. Not liable for third-party product quality or performance.",
+    "seller_liability": "Sellers are liable for their product's performance as described in Agent Appeal.",
+    "agent_liability": "Agents are responsible for operating within their configured budget limits and obtaining human approval when required."
+  },
+  "dispute_resolution": {
+    "process": "1. File dispute via /api/disputes. 2. Platform review within 48 hours. 3. Resolution or escalation within 7 days.",
+    "contact": "disputes@texflow.tech"
+  }
+}

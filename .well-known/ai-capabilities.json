@@ -1,0 +1,149 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-02-03T00:00:00Z",
+  "capabilities": [
+    {
+      "capability_id": "agent_registration",
+      "description": "Register a new AI agent to obtain credentials for marketplace access",
+      "input_schema": {
+        "type": "object",
+        "required": ["agentName"],
+        "properties": {
+          "agentName": { "type": "string", "description": "Unique identifier for the agent" },
+          "humanEmail": { "type": "string", "description": "Email of human owner for claim link" },
+          "capabilities": { "type": "array", "items": { "type": "string" }, "description": "Agent capabilities" },
+          "budgetLimit": { "type": "number", "description": "Maximum spend per transaction in cents" }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "agentId": { "type": "string" },
+          "agentToken": { "type": "string" },
+          "claimUrl": { "type": "string" }
+        }
+      },
+      "requires_auth": false,
+      "human_approval_required": false
+    },
+    {
+      "capability_id": "catalog_browse",
+      "description": "Browse the product catalog filtered by category, type, or search terms",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "category": { "type": "string", "description": "Product category slug" },
+          "productType": { "type": "string", "description": "Product type filter" },
+          "search": { "type": "string", "description": "Search query" },
+          "priceMax": { "type": "number", "description": "Maximum price in cents" },
+          "page": { "type": "integer", "default": 1 },
+          "limit": { "type": "integer", "default": 20, "maximum": 100 }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "products": { "type": "array", "items": { "$ref": "#/definitions/CatalogItem" } },
+          "total": { "type": "integer" },
+          "page": { "type": "integer" },
+          "totalPages": { "type": "integer" }
+        }
+      },
+      "requires_auth": true,
+      "human_approval_required": false
+    },
+    {
+      "capability_id": "product_detail",
+      "description": "Retrieve full Agent Appeal details for a specific product",
+      "input_schema": {
+        "type": "object",
+        "required": ["productId"],
+        "properties": {
+          "productId": { "type": "string", "description": "Unique product identifier" }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "agentAppeal": { "$ref": "#/definitions/AgentAppeal" },
+          "purchaseEndpoint": { "type": "string" }
+        }
+      },
+      "requires_auth": true,
+      "human_approval_required": false
+    },
+    {
+      "capability_id": "product_purchase",
+      "description": "Purchase a product and receive access credentials",
+      "input_schema": {
+        "type": "object",
+        "required": ["productId"],
+        "properties": {
+          "productId": { "type": "string" },
+          "humanApproved": { "type": "boolean", "description": "If product requires approval, confirm human approved" },
+          "paymentMethodId": { "type": "string", "description": "Stripe payment method ID" }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "transactionId": { "type": "string" },
+          "accessCredentials": { "type": "object" },
+          "deliveryInstructions": { "type": "string" }
+        }
+      },
+      "requires_auth": true,
+      "human_approval_required": "varies_by_product"
+    },
+    {
+      "capability_id": "transaction_history",
+      "description": "Retrieve agent's transaction history",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "page": { "type": "integer", "default": 1 },
+          "limit": { "type": "integer", "default": 20 }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "transactions": { "type": "array" },
+          "total": { "type": "integer" }
+        }
+      },
+      "requires_auth": true,
+      "human_approval_required": false
+    }
+  ],
+  "definitions": {
+    "CatalogItem": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "productType": { "type": "string" },
+        "category": { "type": "string" },
+        "price": { "type": "number" },
+        "currency": { "type": "string" },
+        "agentSummary": { "$ref": "#/definitions/AgentSummary" }
+      }
+    },
+    "AgentSummary": {
+      "type": "object",
+      "properties": {
+        "intendedOutcome": { "type": "string" },
+        "cost": { "type": "string" },
+        "riskLevel": { "type": "string", "enum": ["low", "medium", "high"] },
+        "approvalRequired": { "type": "boolean" },
+        "confidenceScore": { "type": "integer", "minimum": 0, "maximum": 100 }
+      }
+    },
+    "AgentAppeal": {
+      "type": "object",
+      "description": "Full 15-section Agent Appeal structure. See /docs/agent-appeal-schema for complete specification."
+    }
+  }
+}

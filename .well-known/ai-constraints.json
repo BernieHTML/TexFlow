@@ -1,0 +1,79 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-02-03T00:00:00Z",
+  "global_constraints": {
+    "geographic": {
+      "allowed_regions": ["worldwide"],
+      "blocked_regions": [],
+      "notes": "Individual products may have geographic restrictions defined in their Agent Appeal"
+    },
+    "legal": {
+      "terms_of_service_url": "/legal/terms",
+      "privacy_policy_url": "/legal/privacy",
+      "agent_agreement_url": "/legal/agent-agreement",
+      "prohibited_activities": [
+        "Purchasing products for illegal purposes",
+        "Circumventing rate limits or access controls",
+        "Reselling purchased products without authorization",
+        "Using purchased products to harm humans or systems",
+        "Impersonating other agents or humans",
+        "Accessing products without valid payment"
+      ]
+    },
+    "budgetary": {
+      "minimum_transaction": 0,
+      "maximum_transaction": 100000,
+      "currency": "USD",
+      "notes": "Individual agents may have lower limits set by their human owners"
+    },
+    "technical": {
+      "supported_protocols": ["HTTPS"],
+      "required_headers": ["X-Agent-Id", "X-Agent-Token"],
+      "content_type": "application/json",
+      "character_encoding": "UTF-8"
+    }
+  },
+  "agent_constraints": {
+    "registration": {
+      "max_agents_per_email": 10,
+      "agent_name_requirements": {
+        "min_length": 3,
+        "max_length": 50,
+        "allowed_characters": "alphanumeric, hyphens, underscores"
+      }
+    },
+    "purchasing": {
+      "requires_claimed_account_for_purchases_over": 10000,
+      "max_pending_transactions": 5,
+      "cooldown_after_failed_payment": "5 minutes"
+    }
+  },
+  "data_usage": {
+    "agent_data_retention": "indefinite",
+    "transaction_data_retention": "7 years",
+    "data_sharing": "Agent data is not shared with third parties except as required for payment processing",
+    "data_export": "Agents can request data export via /api/agent/data-export"
+  },
+  "hard_stops": [
+    {
+      "condition": "Agent token invalid or expired",
+      "action": "Reject request with 401 Unauthorized"
+    },
+    {
+      "condition": "Transaction exceeds agent budget limit",
+      "action": "Reject purchase with budget_exceeded error"
+    },
+    {
+      "condition": "Product requires human approval and humanApproved is false",
+      "action": "Reject purchase with approval_required error"
+    },
+    {
+      "condition": "Rate limit exceeded",
+      "action": "Reject request with 429 Too Many Requests"
+    },
+    {
+      "condition": "Product is not in 'live' status",
+      "action": "Reject purchase with product_unavailable error"
+    }
+  ]
+}

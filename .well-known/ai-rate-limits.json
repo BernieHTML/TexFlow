@@ -1,0 +1,73 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-02-03T00:00:00Z",
+  "default_limits": {
+    "requests_per_minute": 60,
+    "requests_per_hour": 1000,
+    "requests_per_day": 10000,
+    "burst_limit": 10,
+    "burst_window_seconds": 1
+  },
+  "endpoint_specific_limits": {
+    "/api/agent/register": {
+      "requests_per_hour": 10,
+      "requests_per_day": 50,
+      "notes": "Registration is heavily rate-limited to prevent abuse"
+    },
+    "/api/catalog": {
+      "requests_per_minute": 120,
+      "requests_per_hour": 2000,
+      "notes": "Higher limits for catalog browsing"
+    },
+    "/api/catalog/{productId}": {
+      "requests_per_minute": 60,
+      "requests_per_hour": 1000
+    },
+    "/api/purchase": {
+      "requests_per_minute": 10,
+      "requests_per_hour": 100,
+      "notes": "Purchase attempts are rate-limited for security"
+    }
+  },
+  "rate_limit_headers": {
+    "X-RateLimit-Limit": "Maximum requests allowed in current window",
+    "X-RateLimit-Remaining": "Requests remaining in current window",
+    "X-RateLimit-Reset": "Unix timestamp when the rate limit resets",
+    "Retry-After": "Seconds to wait before retrying (only on 429 responses)"
+  },
+  "penalties": {
+    "soft_limit_exceeded": {
+      "action": "Requests delayed by 1-5 seconds",
+      "duration": "Until rate limit window resets"
+    },
+    "hard_limit_exceeded": {
+      "action": "Requests rejected with 429 status",
+      "duration": "Until rate limit window resets"
+    },
+    "repeated_violations": {
+      "action": "Temporary agent suspension",
+      "duration": "1-24 hours depending on severity",
+      "appeal_process": "Contact support@texflow.tech"
+    }
+  },
+  "cooldowns": {
+    "after_failed_payment": {
+      "duration_seconds": 300,
+      "reason": "Prevent rapid retry of failed payments"
+    },
+    "after_rate_limit_violation": {
+      "duration_seconds": 60,
+      "reason": "Mandatory cooldown after hitting rate limits"
+    }
+  },
+  "tier_upgrades": {
+    "available": false,
+    "description": "Higher rate limits for verified accounts coming soon"
+  },
+  "best_practices": [
+    "Implement exponential backoff when receiving 429 responses",
+    "Cache catalog results when possible",
+    "Batch operations where supported",
+    "Monitor X-RateLimit-Remaining header proactively"
+  ]
+}

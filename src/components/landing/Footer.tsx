@@ -37,14 +37,14 @@ export default function Footer() {
                 </span>
               </li>
               <li>
-                <Link href="/docs/merchant" className="text-gray-600 dark:text-gray-400 hover:text-primary-600">
-                  Documentation
-                </Link>
+                <span className="text-gray-400 dark:text-gray-600 opacity-60 cursor-not-allowed">
+                  Documentation <span className="text-xs">(Coming soon)</span>
+                </span>
               </li>
               <li>
-                <Link href="/pricing" className="text-gray-600 dark:text-gray-400 hover:text-primary-600">
-                  Pricing
-                </Link>
+                <span className="text-gray-400 dark:text-gray-600 opacity-60 cursor-not-allowed">
+                  Pricing <span className="text-xs">(Coming soon)</span>
+                </span>
               </li>
             </ul>
           </div>
@@ -61,9 +61,9 @@ export default function Footer() {
                 </span>
               </li>
               <li>
-                <Link href="/api/docs" className="text-gray-600 dark:text-gray-400 hover:text-primary-600">
-                  API Reference
-                </Link>
+                <span className="text-gray-400 dark:text-gray-600 opacity-60 cursor-not-allowed">
+                  API Reference <span className="text-xs">(Coming soon)</span>
+                </span>
               </li>
               <li>
                 <Link href="/.well-known/ai-site.json" className="text-gray-600 dark:text-gray-400 hover:text-primary-600">

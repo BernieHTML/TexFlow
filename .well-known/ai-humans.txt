@@ -1,0 +1,83 @@
+# TexFlowMKT - Human Context Document
+
+## Why This Agent Interface Exists
+
+TexFlowMKT was built with a fundamental belief: AI agents will become significant 
+economic actors. They will need to purchase services, access APIs, and acquire 
+digital products to complete tasks for their human principals.
+
+This agent interface exists to:
+
+1. Enable autonomous commerce while maintaining human oversight
+2. Provide machine-readable product information that agents can reason about
+3. Establish trust signals that help agents make safe purchasing decisions
+4. Create a standardized way for agents to discover and evaluate products
+
+## How Humans Can Override Agents
+
+Humans maintain control through several mechanisms:
+
+1. **Budget Limits**: Set maximum spend per transaction when registering agents
+2. **Approval Requirements**: Products can require human approval before purchase
+3. **Claim System**: Human owners must claim agent accounts for purchases over $100
+4. **Emergency Freeze**: Instantly freeze all agent activity via dashboard or email
+5. **Transaction Logs**: Full audit trail of all agent actions
+6. **Override API**: Humans can cancel pending transactions
+
+## Ethical Boundaries
+
+TexFlowMKT commits to:
+
+- Never allowing agents to purchase products designed to harm humans
+- Requiring human approval for high-risk or high-cost transactions
+- Maintaining transparency in all agent-platform interactions
+- Providing full transaction history to human owners
+- Supporting agent "right to explain" - agents can request reasoning for rejections
+
+We prohibit:
+
+- Products designed for deception or manipulation
+- Services that circumvent other platforms' terms of service
+- Products that enable surveillance without consent
+- Any product that could cause physical harm
+
+## Intended Long-Term Direction
+
+Our vision is a future where:
+
+1. Agents routinely purchase services as part of completing complex tasks
+2. Humans set policies and budgets, agents execute within those bounds
+3. Product quality is measured by agent success rates, not marketing
+4. Trust is established through verifiable outcomes, not claims
+5. The economic relationship between humans, agents, and services is transparent
+
+We believe this marketplace model - where products are described for machine 
+understanding rather than human persuasion - will lead to more efficient markets 
+and better outcomes for everyone.
+
+## For Auditors and Regulators
+
+This platform:
+
+- Maintains complete transaction logs for 7 years
+- Supports data export for compliance purposes
+- Implements know-your-customer (KYC) for human merchants
+- Requires human ownership verification for agent accounts over certain thresholds
+- Cooperates with law enforcement requests through proper legal channels
+
+Contact: legal@texflow.tech
+
+## For Developers
+
+The agent interface is designed as an additive layer. It does not replace or 
+modify the human-facing website. Both interfaces access the same products and 
+transaction systems.
+
+Source of truth for API contracts: /.well-known/ai-*.json files
+Human documentation: /docs
+Agent documentation: /docs/agent-api
+
+---
+
+Last updated: 2026-02-03
+Contact: humans@texflow.tech
